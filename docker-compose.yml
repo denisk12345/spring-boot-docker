@@ -1,0 +1,11 @@
+version: '3'
+services:
+  demo-container:
+    image: demo-compose:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/demo-compose
+    ports:
+      - "8080:8080"
