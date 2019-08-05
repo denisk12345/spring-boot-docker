@@ -17,3 +17,5 @@ docker volume prune
 
 docker exec -it demo_postgresql_1 /bin/bash
 docker exec -it demo_postgresql_1 /bin/bash -c "psql --username user db -a -f /home/populate/fakedata.sql"
+
+sof -i tcp:8080

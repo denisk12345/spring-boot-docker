@@ -1,25 +1,29 @@
 version: '3'
 services:
-  demo-container:
-    image: demo-compose:1
+  app:
+    image: app:1
+    container_name: app
     build:
       context: ./
       dockerfile: Dockerfile
     volumes:
-      - /data/demo-compose
+      - /data/app
     ports:
       - "8080:8080"
-  postgresql:
+    depends_on:
+      - postgres
+    links:
+      - postgres
+  postgres:
     image: 'postgres:10.8-alpine'
+    container_name: postgres
     volumes:
       - './server/scripts:/home/populate'
-      - './server/data:/var/lib/postgresql/data'
+      - './server/data:/var/lib/postgresql/data:cached'
     ports:
       - '5432:5432'
     environment:
       - POSTGRES_DB=db
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
-      - 'DEBUG=app:*'
       - DEBUG_COLORS=true
-    depends_on: []
