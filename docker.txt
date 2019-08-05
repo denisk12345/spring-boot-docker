@@ -9,3 +9,11 @@ docker-compose up
 docker-compose down
 
 docker-compose -f sonar.yml up
+
+docker rm $(docker ps -a -q) -f
+docker volume ls
+docker volume prune
+
+
+docker exec -it demo_postgresql_1 /bin/bash
+docker exec -it demo_postgresql_1 /bin/bash -c "psql --username user db -a -f /home/populate/fakedata.sql"

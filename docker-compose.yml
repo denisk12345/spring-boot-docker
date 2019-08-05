@@ -9,3 +9,17 @@ services:
       - /data/demo-compose
     ports:
       - "8080:8080"
+  postgresql:
+    image: 'postgres:10.8-alpine'
+    volumes:
+      - './server/scripts:/home/populate'
+      - './server/data:/var/lib/postgresql/data'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - 'DEBUG=app:*'
+      - DEBUG_COLORS=true
+    depends_on: []
