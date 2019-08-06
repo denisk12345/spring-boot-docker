@@ -27,3 +27,5 @@ sof -i tcp:8080
 
 org.springframework.boot.devtools.RemoteSpringApplication
 program argument=http://localhost:8080
+
+docker-compose -f docker-app.yml up --build
