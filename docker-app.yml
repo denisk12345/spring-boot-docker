@@ -5,7 +5,7 @@ services:
     container_name: app
     build:
       context: ./
-      dockerfile: Dockerfile.4
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     networks:
