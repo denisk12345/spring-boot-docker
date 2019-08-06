@@ -15,7 +15,12 @@ docker volume ls
 docker volume prune
 
 
-docker exec -it demo_postgresql_1 /bin/bash
-docker exec -it demo_postgresql_1 /bin/bash -c "psql --username user db -a -f /home/populate/fakedata.sql"
+docker exec -it postgres /bin/bash
+docker exec -it postgres /bin/bash -c "psql --username user db -a -f /home/populate/fakedata.sql"
+
+docker exec -it app /bin/sh
+
+docker-compose build, which will build all the services but not run them.
+docker-compose up --build, which will build all the services and then run them.
 
 sof -i tcp:8080
