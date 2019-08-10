@@ -29,3 +29,28 @@ org.springframework.boot.devtools.RemoteSpringApplication
 program argument=http://localhost:8080
 
 docker-compose -f docker-app.yml up --build
+
+
+docker build -f DockerFileServer .
+
+# use docker from minikube
+# https://medium.com/@brianbmathews/getting-started-with-minikube-docker-container-images-for-testing-kubernetes-locally-on-mac-e39adb60bd41
+
+eval $(minikube docker-env)
+
+./mvnw compile jib:dockerBuild -Dimage=toto
+
+kubectl run spring-boot-jib --image=toto --port=8080 --restart=Never
+
+# Wait until pod is running
+kubectl port-forward spring-boot-jib 8080 > /dev/null 2>&1 &
+
+eval $(minikube docker-env -u).
+#unlink docker from minikube
+
+
+#minishift
+https://github.com/minishift/minishift/issues/3271
+
+minishift start
+minishift oc-env
